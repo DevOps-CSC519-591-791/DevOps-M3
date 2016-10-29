@@ -1,4 +1,4 @@
-*.pem
+.keys
 # Logs
 logs
 *.log
