@@ -35,3 +35,4 @@ server.listen(PORT, function(){
     console.log("Server listening on: http://localhost:%s", PORT);
 });
 
+exports.server = server;

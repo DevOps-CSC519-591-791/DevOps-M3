@@ -4,7 +4,7 @@
   "description": "redis playground",
   "main": "main.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/mocha ./test/test.js"
+    "test": "forever start stable_inst.js 2000 && ./node_modules/.bin/istanbul cover ./node_modules/.bin/mocha ./test/test.js && forever stopall"
   },
   "author": "",
   "license": "ISC",
