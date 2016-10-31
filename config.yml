@@ -3,12 +3,22 @@
   remote_user: ubuntu
 
   tasks:
-    - name: install redis
+    - name: install Redis server
       become: yes
       become_method: sudo
-      command: sudo apt-get -y install redis-server
+      apt: name=redis-server state=latest update_cache=yes
 
-    - name: ensure redis service is restarted
+    - name: start redis server
       become: yes
       become_method: sudo
-      service: name=redis state=restarted
+      command: redis-server --daemonize yes
+
+    - name: check if Redis is running
+      become: yes
+      become_method: sudo
+      service: name=redis-server state=started
+
+    - name: enable redis-server to survive reboot
+      become: yes
+      become_method: sudo
+      service: name=redis-server enabled=yes
