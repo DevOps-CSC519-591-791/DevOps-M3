@@ -1,0 +1,14 @@
+---
+- hosts: aws_server
+  remote_user: ubuntu
+
+  tasks:
+    - name: install redis
+      become: yes
+      become_method: sudo
+      command: sudo apt-get -y install redis-server
+
+    - name: ensure redis service is restarted
+      become: yes
+      become_method: sudo
+      service: name=redis state=restarted
