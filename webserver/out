@@ -1,0 +1,7 @@
+events.js:154
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at exports._errnoException (util.js:890:11)
+    at WriteWrap.afterWrite (net.js:767:14)
