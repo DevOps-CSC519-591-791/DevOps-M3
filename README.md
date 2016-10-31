@@ -4,5 +4,5 @@ Repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/ma
 ### current status:
 - create a web application. see another repo  
 TODO: testing script
-- install redis, ansible script done `aws_server ansible_ssh_host=54.234.163.154  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=keys/key4aws.pem`
+- install redis, ansible script done `ansible-playbook -i inventory config.yml`
 
