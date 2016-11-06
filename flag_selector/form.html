@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Feature Flag Selector</title>
+</head>
+<body>
+<div id="featureflags">
+    <h1>Feature Flag Selector for Milestone 3 Simple app</h1>
+    <form action="/submit" method="GET">
+        <fieldset>
+            <label><input type="checkbox" name="flag" value="f1"/>Feature 1</label><br>
+            <label><input type="checkbox" name="flag" value="f2"/>Feature 2</label><br>
+            <label><input type="checkbox" name="flag" value="f3"/>Feature 3</label><br>
+            <br/>
+            The following features are Canary version only!</br></br>
+            <label><input type="checkbox" name="flag" value="f4"/>Feature 4</label><br>
+            <label><input type="checkbox" name="flag" value="f5"/>Feature 5</label><br>
+            <input type="submit" value="Set" />
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
