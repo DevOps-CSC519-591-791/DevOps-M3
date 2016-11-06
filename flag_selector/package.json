@@ -1,8 +1,7 @@
 {
-  "name": "feature_flag_setter",
+  "name": "feature_flag_settor",
   "version": "1.0.0",
   "description": "The web page server for setting feature flags",
-  "main": "flag_setter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
