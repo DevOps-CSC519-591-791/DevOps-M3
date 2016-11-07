@@ -23,6 +23,11 @@
       become_method: sudo
       service: name=redis-server enabled=yes
 
+    - name: flush all redis
+      shell: echo 'flushall' | redis-cli
+
     - name: init the flag
       shell: echo 'set flag 11011'|redis-cli
-      
+    
+    - name: init ip set
+      shell: echo 'lpush proxy http://54.164.22.224'| redis-cli
