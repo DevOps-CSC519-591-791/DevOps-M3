@@ -6,7 +6,7 @@ Our Loadbalancer and redis server is deployed in a AWS EC2 server
 To deploy redis
 ```
 cd main_server_deployer
- ansible-playbook -i inventory deploy_mainserver.yml
+ansible-playbook -i inventory deploy_mainserver.yml
 ```
 
 ### Want to set up the flag?
