@@ -4,7 +4,7 @@ var url = require('url');
 var fs = require('fs');
 var redis = require('redis');
 
-var client = redis.createClient(6379, '127.0.0.1', {})
+var client = redis.createClient(6379, '54.234.163.154', {})
 
 var server = http.createServer(function (req,res){
 	 // parse the URL
