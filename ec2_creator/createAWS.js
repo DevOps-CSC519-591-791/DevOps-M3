@@ -29,7 +29,9 @@ function printIp(isntance_id){
 
 	  // writing the inventory
 	  var content = "aws_server ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem\n";
-	  fs.appendFile("inventory", content, function(err){console.log("wrote inventory!");});
+	  fs.appendFile("inventory", content, function(err){
+	  	console.log("wrote inventory!");
+	  });
 	});
 }
 
