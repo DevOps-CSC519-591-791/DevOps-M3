@@ -22,3 +22,7 @@
       become: yes
       become_method: sudo
       service: name=redis-server enabled=yes
+
+    - name: init the flag
+      shell: echo 'set flag 11011'|redis-cli
+      
