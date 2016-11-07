@@ -38,3 +38,7 @@
     - name: start stable server at 3000
       sudo: yes
       shell: cd /home/ubuntu/M3-simpleApp && forever start stable_inst.js 3000
+      
+    - name: start canary server at 3001
+      sudo: yes
+      shell: cd /home/ubuntu/M3-simpleApp && forever start canary.js 3001
