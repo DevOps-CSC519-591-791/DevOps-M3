@@ -16,3 +16,5 @@ npm install
 forever start selector.js
 ```
 Then go to localhost:8085  
+![flag](README_img/flag.png)
+~[flag2](README_img/flag_done.png)
