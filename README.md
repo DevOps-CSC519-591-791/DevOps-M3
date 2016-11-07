@@ -9,11 +9,12 @@ cd main_server_deployer
 ansible-playbook -i inventory deploy_mainserver.yml
 ```
 
-### Want to set up the flag?
+### Want to set up the feature flags?
 ```
 cd flag_selector
 npm install
 forever start selector.js
 ```
-Then go to localhost:8085  
+Then go to localhost:8085.  
+Note that the change to be effitive at the remote aws server
 ![flag](README_img/flag.png)
