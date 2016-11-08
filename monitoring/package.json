@@ -1,0 +1,9 @@
+{
+  "name": "load_balancer_package",
+  "version": "1.0.0",
+  "description": "The script is used for load balancer",
+  "main": "load_balancer.js",
+  "dependencies": {
+    "redis": "^0.12.1"
+  }
+}
