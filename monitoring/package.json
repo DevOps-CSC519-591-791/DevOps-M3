@@ -4,6 +4,7 @@
   "description": "The script is used for load balancer",
   "main": "load_balancer.js",
   "dependencies": {
-    "redis": "^0.12.1"
+    "redis": "^0.12.1",
+    "nodemailer": "latest"
   }
 }
