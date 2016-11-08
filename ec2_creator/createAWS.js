@@ -1,6 +1,7 @@
 AWS = require('aws-sdk');
 var redis = require('redis');
 var fs = require("fs");
+var proxyServerNum = 0;
 
 // REDIS
 var client = redis.createClient(6379, '54.234.163.154', {})
@@ -31,7 +32,7 @@ function printIp(isntance_id){
 	  global.ip = data.Reservations[0].Instances[0].PublicIpAddress;
 	  console.log("The IP address for aws is : " + global.ip);
 	  // writing ip into redis
-	  client.sadd("proxy", global.ip.substring(7, global.ip.len));
+	  client.sadd("proxy", global.ip);
 
 	  // print all proxy ips
 	  client.smembers("proxy", function(err, items){
@@ -42,8 +43,14 @@ function printIp(isntance_id){
 	  	});
 	  });
 
+	  // count number of existing proxy servers
+	  client.scard("proxy", function(err, value){
+	  	if(err) throw err
+	  	proxyServerNum = value;
+	  })
+
 	  // writing the inventory
-	  var content = "aws_server ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem\n";
+	  var content = "node" + value + " ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem\n";
 	  fs.appendFile("inventory", content, function(err){
 	  	console.log("wrote inventory!");
 	  });
