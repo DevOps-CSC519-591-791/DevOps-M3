@@ -33,7 +33,8 @@ var server = http.createServer(function (req,res){
 	}
 	// generate a dynamic page
 	else if ( url_parts.pathname == '/submit' ) {
-		var x = 0
+		var x = 0;
+		var alert = '0';
 		if (url_parts.query.flag.indexOf('f1')>=0){
 			x = x+10000
 		}
@@ -50,15 +51,16 @@ var server = http.createServer(function (req,res){
 			x = x+1
 		}
 		if (url_parts.query.alert.indexOf('alert')>=0){
-			client.set('alert', 1);
+			alert = '1';
 		} else {
-			client.set('alert', 0);
+			alert = '0';
 		}
 		res.write('finish!')
 		setTimeout(function(){
 			x = '00000' + x;
 			x = x.substring(x.length-5);
 			client.set('flag', x);
+			client.set('alert', alert);
 		},1);
 		
 		res.end();
