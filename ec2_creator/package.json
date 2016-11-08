@@ -4,7 +4,8 @@
   "description": "The script to create the ec2 instance for serving the M3-simple app",
   "main": "createAWS.js",
   "dependencies": {
-    "aws-sdk": "^2.6.15"
+    "aws-sdk": "^2.6.15",
+    "redis": "^0.12.1"
   },
   "devDependencies": {},
   "scripts": {
