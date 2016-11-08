@@ -25,7 +25,7 @@ var proxyServer = http.createServer(function(req, res){
 		} else {
 			port = '3000';
 		}
-		proxy.web(req, res, {target: serverIp + ':' + port});
+		proxy.web(req, res, {target: 'http://' + serverIp + ':' + port});
 		client.sadd("proxy", serverIp);
 	});
 });

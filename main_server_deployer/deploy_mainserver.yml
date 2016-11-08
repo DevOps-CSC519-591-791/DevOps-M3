@@ -27,7 +27,7 @@
       shell: echo 'set flag 11011' | redis-cli
     
     - name: init stable server set
-      shell: echo 'sadd proxy http://54.164.22.224' | redis-cli
+      shell: echo 'sadd proxy 54.164.22.224' | redis-cli
 
     - name: init alert set
       shell: echo 'set alert 0' | redis-cli
