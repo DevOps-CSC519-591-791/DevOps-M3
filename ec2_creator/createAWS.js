@@ -1,5 +1,9 @@
 AWS = require('aws-sdk');
+var redis = require('redis');
 var fs = require("fs");
+
+// REDIS
+var client = redis.createClient(6379, '54.234.163.154', {})
 
 
 AWS.config.update({
@@ -26,6 +30,17 @@ function printIp(isntance_id){
 	  if (err) return console.error(err)
 	  global.ip = data.Reservations[0].Instances[0].PublicIpAddress;
 	  console.log("The IP address for aws is : " + global.ip);
+	  // writing ip into redis
+	  client.lpush("proxy", global.ip);
+
+	  // print all proxy ips
+	  client.lrange("proxy", 0, -1, function(err, items){
+	  	if(err) return console.error(err)
+	  	console.log("List current proxy ips:")
+	  	items.forEach(function(ip){
+	  		console.log(ip + "\n");
+	  	});
+	  });
 
 	  // writing the inventory
 	  var content = "aws_server ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem\n";
