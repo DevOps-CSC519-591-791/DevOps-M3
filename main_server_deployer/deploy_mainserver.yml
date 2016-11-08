@@ -30,7 +30,7 @@
       shell: echo 'set flag 11011'| redis-cli
     
     - name: init stable server set
-      shell: echo 'lpush proxy 54.164.22.224:3000'| redis-cli
+      shell: echo 'sadd proxy http://54.164.22.224:3000'| redis-cli
 
     - name: init canary server set
-      shell: echo 'lpush proxy 54.164.22.224:3001'| redis-cli
+      shell: echo 'sadd proxy http://54.164.22.224:3001'| redis-cli
