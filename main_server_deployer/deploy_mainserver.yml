@@ -45,7 +45,7 @@
 
     - name: Upload the private key used for Github cloning
       sudo: yes
-      copy: src=../../keys/key4m3github.pem dest=/root/.ssh/github
+      copy: src=../../keys/key4m3github-master-server dest=/root/.ssh/github
 
     - name: Correct SSH deploy key permissions
       sudo: yes
