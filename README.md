@@ -29,6 +29,7 @@ Milestone 3 file structure.
 │   ├── deploy_mainserver.yml
 │   └── inventory
 └── monitoring
+    ├── scaling.js
     └── package.json
 ```
  - Folder `ec2_creator` is used to build a new AWS EC2 instance and config the production environment automatically.
