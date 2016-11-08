@@ -1,6 +1,6 @@
 # DevOps-M3
-This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/master/Project/M3.md). We use [M3-simpleApp](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp) as our test node.js project.
- -  Test node.js project: [link](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp)
+This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/master/Project/M3.md). We use [M3-simpleApp](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp) as our simple node.js project.
+ -  Simple node.js project: [link](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp)
  -  Screencast:
 
 ### Prerequisite
@@ -33,14 +33,14 @@ Milestone 3 file structure.
 ```
  - Folder `ec2_creator` is used to build a new AWS EC2 instance and config the production environment automatically.
   - File `createAWS.js` is the main script to build the AWS EC2 instance.
-  - Folder `deploy` stores a configuration files used for ansible. These configuration files will install node.js, npm, git clone the test node.js app and start the express server using forever.
+  - Folder `deploy` stores a configuration files used for ansible. These configuration files will install node.js, npm, git clone the simple node.js app and start the express server using forever.
   - File `inventory` will be updated each time when a new AWS EC2 instance is built.
   - File `package.json` is a configure file for node.js.
-  - File `ec2_creator.sh` is a shell file. Basically, you can run `bash ec2_creator.sh`. And then a new AWS EC2 instance with production environment and our test node.js app will be built.
+  - File `ec2_creator.sh` is a shell file. Basically, you can run `bash ec2_creator.sh`. And then a new AWS EC2 instance with production environment and our simple node.js app will be built.
   
  - Folder `flag_selector` store the scripts and view pages of feature flag selection.
   - File `form.html` is a view page for feature flag selection and alert.
-  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([`stable_inst.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/stable_inst.js) and [`canary.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/canary.js)) in our test node.js app will read certain key stored in redis and display certain turn-on features.
+  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([`stable_inst.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/stable_inst.js) and [`canary.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/canary.js)) in our simple node.js app will read certain key stored in redis and display certain turn-on features.
   - File `package.json` is a configure file for node.js.
 
  - Folder `load_balancer` is used to perform a canary release - route a percantage of traffix to a newly staged version of software and remaining traffix to stable version of software.
