@@ -1,0 +1,15 @@
+{
+  "name": "load_balancer",
+  "version": "0.0.0",
+  "description": "The ability to perform a canary release: Using a proxy/load balancer server, route a percentage of traffic to a newly staged version of software and remaining traffic to a stable version of software.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zhewei",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.12.3",
+    "redis": "^0.12.1",
+    "http-proxy": "^1.15.2"
+  }
+}

@@ -31,10 +31,11 @@ function printIp(isntance_id){
 	  global.ip = data.Reservations[0].Instances[0].PublicIpAddress;
 	  console.log("The IP address for aws is : " + global.ip);
 	  // writing ip into redis
-	  client.lpush("proxy", global.ip);
+	  client.sadd("proxy", global.ip + ":3000");
+	  client.sadd("proxy", global.ip + ":3001");
 
 	  // print all proxy ips
-	  client.lrange("proxy", 0, -1, function(err, items){
+	  client.smembers("proxy", function(err, items){
 	  	if(err) return console.error(err)
 	  	console.log("List current proxy ips:")
 	  	items.forEach(function(ip){
