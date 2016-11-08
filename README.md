@@ -57,15 +57,15 @@ Milestone 3 file structure.
   - File `package.json` is a configure file for node.js.
 
 
-### Setting up redis and loadbalancer
-Our Loadbalancer and redis server is deployed in a AWS EC2 server  
-To deploy redis
-```
-cd main_server_deployer
-ansible-playbook -i inventory deploy_mainserver.yml
-```
+### TASK1: `Deploy after build, testing and analysis stage.`
 
-### Want to set up the feature flags?
+### TASK2: `Configure a production environment automatically.`
+
+### TASK3: `Monitor the deployed application.`
+
+### TASK4: `Autoscale individual components of production.`
+
+### TASK5: `Set up the feature flags.`
 ```
 cd flag_selector
 npm install
@@ -74,3 +74,13 @@ forever start selector.js
 Then go to localhost:8085.  
 Note that the change to be effitive at the remote aws server
 ![flag](README_img/flag.png)
+
+### TASK6: `Perform a canary release.`
+Our Loadbalancer and redis server is deployed in a AWS EC2 server  
+To deploy redis
+```
+cd main_server_deployer
+ansible-playbook -i inventory deploy_mainserver.yml
+```
+
+
