@@ -27,10 +27,10 @@
       shell: echo 'flushall' | redis-cli
 
     - name: init the flag
-      shell: echo 'set flag 11011'| redis-cli
+      shell: echo 'set flag 11011' | redis-cli
     
     - name: init stable server set
-      shell: echo 'sadd proxy http://54.164.22.224:3000'| redis-cli
+      shell: echo 'sadd proxy http://54.164.22.224' | redis-cli
 
-    - name: init canary server set
-      shell: echo 'sadd proxy http://54.164.22.224:3001'| redis-cli
+    - name: init alert set
+      shell: echo 'set alert 0' | redis-cli

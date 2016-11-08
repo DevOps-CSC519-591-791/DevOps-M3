@@ -49,7 +49,11 @@ var server = http.createServer(function (req,res){
 		if (url_parts.query.flag.indexOf('f5')>=0){
 			x = x+1
 		}
-		
+		if (url_parts.query.alert.indexOf('alert')>=0){
+			client.set('alert', 1);
+		} else {
+			client.set('alert', 0);
+		}
 		res.write('finish!')
 		setTimeout(function(){
 			x = '00000' + x;
