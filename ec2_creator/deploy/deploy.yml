@@ -44,4 +44,4 @@
       shell: cd /home/ubuntu/M3-simpleApp && forever start canary.js 3001
 
     - name: start monitoring
-      shell: cd /home/ubuntu/M3-simpleApp && forever start monitoring.js
+      shell: cd /home/ubuntu/M3-simpleApp && node monitoring.js
