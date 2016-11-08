@@ -35,22 +35,24 @@ var server = http.createServer(function (req,res){
 	else if ( url_parts.pathname == '/submit' ) {
 		var x = 0;
 		var alert = '0';
-		if (url_parts.query.flag.indexOf('f1')>=0){
-			x = x+10000
+		if ('flag' in url_parts.query){
+			if (url_parts.query.flag.indexOf('f1')>=0){
+				x = x+10000
+			}
+			if (url_parts.query.flag.indexOf('f2')>=0){
+				x = x+1000
+			}
+			if (url_parts.query.flag.indexOf('f3')>=0){
+				x = x+100
+			}
+			if (url_parts.query.flag.indexOf('f4')>=0){
+				x = x+10
+			}
+			if (url_parts.query.flag.indexOf('f5')>=0){
+				x = x+1
+			}
 		}
-		if (url_parts.query.flag.indexOf('f2')>=0){
-			x = x+1000
-		}
-		if (url_parts.query.flag.indexOf('f3')>=0){
-			x = x+100
-		}
-		if (url_parts.query.flag.indexOf('f4')>=0){
-			x = x+10
-		}
-		if (url_parts.query.flag.indexOf('f5')>=0){
-			x = x+1
-		}
-		if (url_parts.query.alert.indexOf('alert')>=0){
+		if ('alert' in url_parts.query){
 			alert = '1';
 		} else {
 			alert = '0';
