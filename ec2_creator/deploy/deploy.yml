@@ -42,3 +42,6 @@
     - name: start canary server at 3001
       sudo: yes
       shell: cd /home/ubuntu/M3-simpleApp && forever start canary.js 3001
+
+    - name: start monitoring
+      shell: cd /home/ubuntu/M3-simpleApp && forever start monitoring.js
