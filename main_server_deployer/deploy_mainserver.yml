@@ -34,3 +34,13 @@
 
     - name: init alert set
       shell: echo 'set alert 0' | redis-cli
+
+    - name: forever stop all services
+      sudo: yes
+      shell: forever stopall
+
+    - name: load the balancer
+      shell: cd /home/ubuntu/DevOps-M3/load_balancer && forever start balancer.js
+
+    - name: load the selector
+      shell: cd /home/ubuntu/DevOps-M3/flag_selector && forever start selector.js
