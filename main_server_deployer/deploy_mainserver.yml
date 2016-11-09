@@ -70,9 +70,11 @@
       shell: cd /home/ubuntu/DevOps-M3/monitoring && npm install
 
     - name: load the balancer
+      sudo: yes
       shell: cd /home/ubuntu/DevOps-M3/load_balancer && forever start balancer.js
 
     - name: load the selector
+      sudo: yes
       shell: cd /home/ubuntu/DevOps-M3/flag_selector && forever start selector.js
 
     # - name: re-deploy all slavers
