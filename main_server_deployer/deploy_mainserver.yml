@@ -50,7 +50,7 @@
       file: dest=/root/.ssh/github mode=0600
     
     - name: Remove DevOps-M3 directory in master
-      suto: yes
+      sudo: yes
       shell: rm -rf /home/ubuntu/DevOps-M3
 
     - name: Deploy site files from Github repository
