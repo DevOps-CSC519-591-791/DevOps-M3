@@ -49,9 +49,21 @@
       sudo: yes
       git: repo=git@github.ncsu.edu:DevOps-Milestones/DevOps-M3.git dest=/home/ubuntu/DevOps-M3 key_file=/root/.ssh/github accept_hostkey=yes force=yes
     
-    - name: install packages for DevOps-M3
+    - name: install packages for DevOps-M3 1
       sudo: yes
-      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && npm install && cd /home/ubuntu/DevOps-M3/flag_selector && npm install && cd /home/ubuntu/DevOps-M3/load_balancer && npm install && cd /home/ubuntu/DevOps-M3/monitoring && npm install
+      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && npm install
+
+    - name: install packages for DevOps-M3 2
+      sudo: yes
+      shell: cd /home/ubuntu/DevOps-M3/flag_selector && npm install
+
+    - name: install packages for DevOps-M3 3
+      sudo: yes
+      shell: cd /home/ubuntu/DevOps-M3/load_balancer && npm install
+
+    - name: install packages for DevOps-M3 4
+      sudo: yes
+      shell: cd /home/ubuntu/DevOps-M3/monitoring && npm install
 
     - name: load the balancer
       shell: cd /home/ubuntu/DevOps-M3/load_balancer && forever start balancer.js
