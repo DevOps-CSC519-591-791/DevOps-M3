@@ -4,7 +4,8 @@ This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Co
  -  Screencast:
 
 ### Prerequisite
-Milestone 3 server structure. [img]
+Milestone 3 server structure.
+![flag](README_img/Server structure.png)
 
 Milestone 3 file structure. 
 ```
