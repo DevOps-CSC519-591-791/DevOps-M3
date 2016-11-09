@@ -187,11 +187,13 @@ We uses the same rule as mentioned above (both the average CPU usage and average
 **Requirement:** The ability to use feature flags, serviced by a global redis store, to toggle functionality of a deployed feature in production.
 
 We created a GUI to do feature flag selection, which will be more straightforward. The screenshot of the GUI is shown below.
-![flag](README_img/flag.png)
+![flag](README_img/Feature flag selector GUI.png)
 
 In order to distinguish the stable version of application and canary version of application, we defined that the stable version can access to feature 1 to 3 and canary version can access not only feature 1 to 3, but also new feature 4 and 5. Also we added an alert checkbox (for TASK 6) to manually trigger the alert instead of using stress testing to reach our predefined rule mentioned in TASK4 and TASK5.
 
 When certain feature is turned on, different page will show different message. The screenshots below display that stable version of application turned on feature 1 and 2 and the canary version of application turned on feature 1, 2, 4.
+![flag1](README_img/Stable version of application turned on feature 1, 2.png)
+![flag2](README_img/Canary version of application turned on feature 1, 2, 4.png)
 
 ### TASK6: `Perform a canary release.`
 **Requirement:** The ability to perform a canary release: Using a proxy/load balancer server, route a percentage of traffic to a newly staged version of software and remaining traffic to a stable version of software. Stop routing traffic to canary if alert is raised.
