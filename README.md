@@ -58,6 +58,111 @@ Milestone 3 file structure.
 
 
 ### TASK1: `Deploy after build, testing and analysis stage.`
+**Requirement:** The ability to deploy software to the production environment triggered after build, testing, and analysis stage is completed. The deployment needs to occur on actual remote machine/VM (e.g. AWS, droplet, VCL), and not a local VM.
+
+At beginning, the developer changes the source code (simple node.js app in this case), commits and pushes the modifications to GitHub.Then Then GitHub webhook will trigger Jenkins and start a new job. Each new job will run [test suite](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/test/test.js). The output of test suite is shown below.
+```
++ bash test.sh
+info:    Forever processing file: stable_inst.js
+
+> queue@0.0.0 test /var/lib/jenkins/workspace/M3-simpleapp
+> ./node_modules/.bin/istanbul cover ./node_modules/.bin/mocha ./test/test.js
+  server
+    ✓ should return 200
+
+  1 passing (17ms)
+```
+
+If all test cases are passed, the post build task of Jenkins will use ansible to deploy the latest version of software to all AWS EC2 instances. Sample output is shown below.
+```
+PLAY [aws_server] **************************************************************
+
+TASK [setup] *******************************************************************
+ok: [node2]
+ok: [node0]
+ok: [node1]
+
+TASK [common : update apt packages] ********************************************
+ok: [node0]
+ok: [node2]
+ok: [node1]
+
+TASK [common : install basic apt packages] *************************************
+ok: [node2] => (item=[u'curl', u'git'])
+ok: [node1] => (item=[u'curl', u'git'])
+ok: [node0] => (item=[u'curl', u'git'])
+
+TASK [nodejs : update apt packages] ********************************************
+ok: [node2]
+ok: [node1]
+ok: [node0]
+
+TASK [nodejs : install nodejs requirements] ************************************
+ok: [node2] => (item=[u'python-software-properties', u'python', u'g++', u'make'])
+ok: [node0] => (item=[u'python-software-properties', u'python', u'g++', u'make'])
+ok: [node1] => (item=[u'python-software-properties', u'python', u'g++', u'make'])
+
+TASK [nodejs : add Chris Lea's nodejs ppa] *************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [nodejs : install nodejs] *************************************************
+changed: [node1]
+changed: [node2]
+changed: [node0]
+
+TASK [Install forever] *********************************************************
+changed: [node2]
+changed: [node1]
+changed: [node0]
+
+TASK [make sure all port stopped] **********************************************
+changed: [node2]
+changed: [node1]
+changed: [node0]
+
+TASK [Creates .ssh directory for root] *****************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [Upload the private key used for Github cloning] **************************
+ok: [node2]
+ok: [node0]
+ok: [node1]
+
+TASK [Correct SSH deploy key permissions] **************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [Deploy site files from Github repository] ********************************
+changed: [node2]
+changed: [node1]
+changed: [node0]
+
+TASK [install packages for M3-simpleApp] ***************************************
+changed: [node0]
+changed: [node1]
+changed: [node2]
+
+TASK [start stable server at 3000] *********************************************
+changed: [node2]
+changed: [node1]
+changed: [node0]
+
+TASK [start canary server at 3001] *********************************************
+changed: [node2]
+changed: [node1]
+changed: [node0]
+
+PLAY RECAP *********************************************************************
+node0                      : ok=16   changed=7    unreachable=0    failed=0   
+node1                      : ok=16   changed=7    unreachable=0    failed=0   
+node2                      : ok=16   changed=7    unreachable=0    failed=0   
+```
+
 
 ### TASK2: `Configure a production environment automatically.`
 

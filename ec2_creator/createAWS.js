@@ -1,17 +1,13 @@
 AWS = require('aws-sdk');
 var redis = require('redis');
 var fs = require("fs");
-var proxyServerNum = 0;
-
-// REDIS
-var client = redis.createClient(6379, '54.234.163.154', {})
-
 
 AWS.config.update({
 	accessKeyId: 'AKIAJF2DN75XZVU4HMCA',
 	secretAccessKey: '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',
     region: 'us-east-1'
 });
+
 
 var ec2 = new AWS.EC2();
 
@@ -25,37 +21,6 @@ var params = {
 
 var id;
 var ip;
-
-function printIp(isntance_id){
-	ec2.waitFor('instanceRunning', {InstanceIds: [isntance_id]}, function(err, data) {
-	  if (err) return console.error(err)
-	  global.ip = data.Reservations[0].Instances[0].PublicIpAddress;
-	  console.log("The IP address for aws is : " + global.ip);
-	  // writing ip into redis
-	  client.sadd("proxy", global.ip);
-
-	  // print all proxy ips
-	  client.smembers("proxy", function(err, items){
-	  	if(err) return console.error(err)
-	  	console.log("List current proxy ips:")
-	  	items.forEach(function(ip){
-	  		console.log(ip + "\n");
-	  	});
-	  });
-
-	  // count number of existing proxy servers
-	  client.scard("proxy", function(err, value){
-	  	if(err) throw err
-	  	proxyServerNum = value;
-	  })
-
-	  // writing the inventory
-	  var content = "node" + value + " ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem\n";
-	  fs.appendFile("inventory", content, function(err){
-	  	console.log("wrote inventory!");
-	  });
-	});
-}
 
 function createInstance(){
 	ec2.runInstances(params, function(err, data){
@@ -73,5 +38,15 @@ function createInstance(){
 
 createInstance();
 
+function printIp(isntance_id){
+	ec2.waitFor('instanceRunning', {InstanceIds: [isntance_id]}, function(err, data) {
+	  if (err) return console.error(err)
+	  global.ip = data.Reservations[0].Instances[0].PublicIpAddress;
+	  console.log("The IP address for aws is : " + global.ip);
 
+	  // writing the inventory
+	  var content = "new_ec2_slaver ansible_ssh_host=" + global.ip + "  ansible_ssh_user=ubuntu ansible_ssh_private_key_file=keys\n";
+	  fs.writeFile("inventory", content, function(err){console.log("wrote inventory!");});
+	});
+}
 
