@@ -59,7 +59,7 @@
     
     - name: grant privilege to keys/key4aws.permissions
       sudo: yes
-      shell: dest=/home/ubuntu/DevOps-M3/keys/key4aws.pem mode=0500
+      shell: dest=/home/ubuntu/DevOps-M3/keys/key4aws.pem mode=500
 
     - name: install packages for DevOps-M3 1
       sudo: yes
