@@ -1,0 +1,16 @@
+{
+  "name": "ec2_creator",
+  "version": "1.0.0",
+  "description": "The script to create the ec2 instance for serving the M3-simple app",
+  "main": "createAWS.js",
+  "dependencies": {
+    "aws-sdk": "^2.6.15",
+    "redis": "^0.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jianfeng Chen",
+  "license": "ISC"
+}
