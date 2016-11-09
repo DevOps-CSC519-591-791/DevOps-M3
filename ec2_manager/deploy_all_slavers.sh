@@ -6,9 +6,9 @@ rm slavers
 
 cat ips | while read LINE
 do
-	echo "$LINE ansible_ssh_host=$LINE ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem" >> "slavers"
+	echo "aws_server ansible_ssh_host=$LINE ansible_ssh_user=ubuntu ansible_ssh_private_key_file=../keys/key4aws.pem" >> "slavers"
 done
 
 rm ips
 
-ansible-playbook -i slavers deploy/deploy.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i slavers deploy/deploy.yml
