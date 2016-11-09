@@ -11,4 +11,4 @@ done
 
 sudo rm ips
 
-sudo ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i slavers deploy/deploy.yml -vvv
+sudo ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i slavers deploy/deploy.yml

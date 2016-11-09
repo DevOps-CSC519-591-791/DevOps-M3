@@ -45,4 +45,5 @@
       shell: cd /home/ubuntu/M3-simpleApp && forever start canary.js 3001
 
     - name: start monitoring
+      sudo: yes
       shell: cd /home/ubuntu/M3-simpleApp && forever start monitoring.js
