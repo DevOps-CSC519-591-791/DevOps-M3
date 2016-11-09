@@ -1,4 +1,4 @@
 #!/bin/sh
 
-node createAWS.js
-ansible-playbook -i inventory deploy/deploy.yml
+sudo node createAWS.js
+sudo ansible-playbook -i inventory deploy/deploy.yml

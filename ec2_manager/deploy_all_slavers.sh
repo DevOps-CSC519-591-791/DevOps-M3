@@ -1,6 +1,6 @@
 #!/bin/sh
 
-node updateRedisIps.js
+sudo node updateRedisIps.js
 echo 'smembers proxy'|redis-cli -h 54.234.163.154 > ips
 rm slavers
 

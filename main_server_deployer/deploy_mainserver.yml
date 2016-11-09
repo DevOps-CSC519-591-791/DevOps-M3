@@ -33,6 +33,10 @@
       sudo: yes
       shell: forever stopall
 
+    - name: makesure jenkins is running
+      sudo: yes
+      shell: service jenkins restart
+
     - name: Creates .ssh directory for root
       sudo: yes
       file: path=/root/.ssh state=directory

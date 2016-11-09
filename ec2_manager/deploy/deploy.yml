@@ -1,6 +1,7 @@
 ---
 - hosts: aws_server
   remote_user: ubuntu
+  sudo: yes
   roles:
     - common
     - nodejs
