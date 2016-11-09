@@ -77,9 +77,9 @@
       sudo: yes
       shell: cd /home/ubuntu/DevOps-M3/flag_selector && forever start selector.js
 
-    # - name: re-deploy all slavers
-    #   sudo: yes
-    #   shell: cd /home/ubuntu/DevOps-M3/ec2_manager && bash deploy_all_slavers.sh
+    - name: re-deploy all slavers
+      sudo: yes
+      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && bash deploy_all_slavers.sh
 
     - name: start scaling
       sudo: yes
