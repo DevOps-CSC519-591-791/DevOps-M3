@@ -11,17 +11,17 @@ Milestone 3 file structure.
 ```
 .
 ├── ec2_manager
+│   ├── ec2_creator.sh
 │   ├── createAWS.js
 │   ├── deploy
 │   │   ├── deploy.retry
 │   │   ├── deploy.yml
 │   │   └── roles
-│   ├── deploy_all_slavers.sh
-│   ├── ec2_creator.sh
 │   ├── inventory
-│   ├── package.json
+│   ├── deploy_all_slavers.sh
+│   ├── updateRedisIps.js
 │   ├── slavers
-│   └── updateRedisIps.js
+│   └── package.json
 ├── flag_selector
 │   ├── form.html
 │   ├── package.json
@@ -37,6 +37,7 @@ Milestone 3 file structure.
     └── package.json
 ```
  - Folder `ec2_manager` is used to build a new AWS EC2 instance and config the production environment automatically.
+  - File `ec2_creator.sh` is a shell file. Basically, you can run `bash ec2_creator.sh`. And then a new AWS EC2 instance with production environment and our simple node.js application will be built.
   - File `createAWS.js` is the main script to build the AWS EC2 instance.
   - Folder `deploy` stores a configuration files used for ansible. These configuration files will install node.js, npm, git clone the simple node.js application and start the express server using forever.
   - File `inventory` stores the information of newly-added AWS EC2 instance. It is used to automatically configure one production environment.
@@ -44,7 +45,7 @@ Milestone 3 file structure.
   - File `updateRedisIps.js` is called by `deploy_all_slavers.sh`. It will add a new ip address to Redis.
   - File `slavers` stores the information of all created AWS EC2 instances. It is used to automatically configure all production environments when Jenkins build is pass.
   - File `package.json` is a configure file for node.js.
-  - File `ec2_creator.sh` is a shell file. Basically, you can run `bash ec2_creator.sh`. And then a new AWS EC2 instance with production environment and our simple node.js application will be built.
+
   
  - Folder `flag_selector` store the scripts and view pages of feature flag selection.
   - File `form.html` is a view page for feature flag selection and alert.
