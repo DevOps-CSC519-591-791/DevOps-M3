@@ -41,7 +41,7 @@ Milestone 3 file structure.
   
  - Folder `flag_selector` store the scripts and view pages of feature flag selection.
   - File `form.html` is a view page for feature flag selection and alert.
-  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([`stable_inst.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/stable_inst.js) and [`canary.js`](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/canary.js)) in our simple node.js app will read certain key stored in redis and display certain turn-on features.
+  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([stable_inst.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/stable_inst.js) and [canary.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/canary.js)) in our simple node.js app will read certain key stored in redis and display certain turn-on features.
   - File `package.json` is a configure file for node.js.
 
  - Folder `load_balancer` is used to perform a canary release - route a percantage of traffix to a newly staged version of software and remaining traffix to stable version of software.
@@ -163,12 +163,25 @@ node1                      : ok=16   changed=7    unreachable=0    failed=0
 node2                      : ok=16   changed=7    unreachable=0    failed=0   
 ```
 
-
 ### TASK2: `Configure a production environment automatically.`
+**Requirement:** The ability to configure a production environment automatically, including all infrastructure components, such web server, app service, load balancers, and redis stores. Configure should be accopmlished by using a configuration management tool, such as ansible, or docker. Alternatively, a cluster management approach could also work (e.g., kubernates).
+
+We use ansible to meet with this requirement. The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/ec2_creator/deploy/deploy.yml) in /ec2_creator/deploy/ folder is focus on configuring the production environment, which will do following tasks each time:
+ - Install node.js, npm
+ - Git clone the simple node.js app source code 
+ - Use forever to start the stable app on port 3000 and the canary app on port 3001.
 
 ### TASK3: `Monitor the deployed application.`
+**Requirement:** The ability to monitor the deployed application (using at least 2 metrics) and send alerts using email or SMS (e.g., smtp, mandrill, twilio). An alert can be sent based on some predefined rule.
+
+We wrote a [monitoring.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/monitoring.js) file to check the `CPU usage` and `memory usage` of each AWS EC2 instance each 3 seconds by default. Then we stored the latest 20 records into Redis store using each ip address as the key.
+
+In [scaling.js](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/monitoring/scaling.js) file, we will check the average CPU and memory usage of each AWS EC2 instances by using [os-monitor](https://www.npmjs.com/package/os-monitor). If both the average CPU usage and average memory usage is higher than 70%, an email will be send by using [Nodemailer 2.x](https://nodemailer.com/).
 
 ### TASK4: `Autoscale individual components of production.`
+**Requirement:** The ability to autoscale individual components of production and maintain and track in a central discovery service. Autoscale can be triggered by a predefined rule.
+
+We uses the same rule as mentioned above (both the average CPU usage and average memory usage is higher than 70%). If this rule is reached, the main server will not only send the email mentioned in TASK4, but also create a new AWS EC2 instance and set up the environment, deploy the code and start the server automatically as mentioned in TASK2. Once a new AWS EC2 instance is built, the main server will start monitoring it automatically and start analyse the CPU usage and memory usage.
 
 ### TASK5: `Set up the feature flags.`
 ```
