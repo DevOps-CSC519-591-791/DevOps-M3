@@ -53,6 +53,10 @@
       sudo: yes
       git: repo=git@github.ncsu.edu:DevOps-Milestones/DevOps-M3.git dest=/home/ubuntu/DevOps-M3 key_file=/root/.ssh/github accept_hostkey=yes force=yes
     
+    - name: grant privilege to keys/key4aws.permissions
+      sudo: yes
+      shell: dest=/home/ubuntu/DevOps-M3/keys/key4aws.pem mode=0500
+
     - name: install packages for DevOps-M3 1
       sudo: yes
       shell: cd /home/ubuntu/DevOps-M3/ec2_manager && npm install
@@ -77,9 +81,9 @@
       sudo: yes
       shell: cd /home/ubuntu/DevOps-M3/flag_selector && forever start selector.js
 
-    - name: re-deploy all slavers
-      sudo: yes
-      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && bash deploy_all_slavers.sh
+    # - name: re-deploy all slavers
+    #   sudo: yes
+    #   shell: cd /home/ubuntu/DevOps-M3/ec2_manager && bash deploy_all_slavers.sh
 
     - name: start scaling
       sudo: yes
