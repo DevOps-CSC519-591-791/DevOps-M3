@@ -51,7 +51,7 @@
     
     - name: install packages for DevOps-M3
       sudo: yes
-      shell: cd /home/ubuntu/DevOps-M3/ec2_creator && npm install && cd /home/ubuntu/DevOps-M3/flag_selector && npm install && cd /home/ubuntu/DevOps-M3/load_balancer && npm install && cd /home/ubuntu/DevOps-M3/monitoring && npm install
+      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && npm install && cd /home/ubuntu/DevOps-M3/flag_selector && npm install && cd /home/ubuntu/DevOps-M3/load_balancer && npm install && cd /home/ubuntu/DevOps-M3/monitoring && npm install
 
     - name: load the balancer
       shell: cd /home/ubuntu/DevOps-M3/load_balancer && forever start balancer.js
