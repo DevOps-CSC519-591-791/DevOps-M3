@@ -25,9 +25,6 @@
 
     - name: init the flag
       shell: echo 'set flag 11011' | redis-cli
-    
-    - name: init stable server set
-      shell: echo 'sadd proxy 54.164.22.224' | redis-cli
 
     - name: init alert set
       shell: echo 'set alert 0' | redis-cli
@@ -61,3 +58,6 @@
 
     - name: load the selector
       shell: cd /home/ubuntu/DevOps-M3/flag_selector && forever start selector.js
+
+    - name: re-deploy all slavers
+      shell: cd /home/ubuntu/DevOps-M3/ec2_manager && bash deploy_all_slavers.sh
