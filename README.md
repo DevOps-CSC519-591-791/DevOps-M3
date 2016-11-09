@@ -201,4 +201,5 @@ cd main_server_deployer
 ansible-playbook -i inventory deploy_mainserver.yml
 ```
 
+[Sending Email]:https://nodemailer.com/2-0-0-beta/setup-smtp/
 
