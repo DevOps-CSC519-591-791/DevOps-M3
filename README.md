@@ -10,15 +10,18 @@ Milestone 3 server structure.
 Milestone 3 file structure. 
 ```
 .
-├── ec2_creator
+├── ec2_manager
 │   ├── createAWS.js
 │   ├── deploy
-│   │   ├── deploy.retry
-│   │   ├── deploy.yml
-│   │   └── roles
+│   │   ├── deploy.retry
+│   │   ├── deploy.yml
+│   │   └── roles
+│   ├── deploy_all_slavers.sh
 │   ├── ec2_creator.sh
 │   ├── inventory
-│   └── package.json
+│   ├── package.json
+│   ├── slavers
+│   └── updateRedisIps.js
 ├── flag_selector
 │   ├── form.html
 │   ├── package.json
@@ -33,10 +36,13 @@ Milestone 3 file structure.
     ├── scaling.js
     └── package.json
 ```
- - Folder `ec2_creator` is used to build a new AWS EC2 instance and config the production environment automatically.
+ - Folder `ec2_manager` is used to build a new AWS EC2 instance and config the production environment automatically.
   - File `createAWS.js` is the main script to build the AWS EC2 instance.
   - Folder `deploy` stores a configuration files used for ansible. These configuration files will install node.js, npm, git clone the simple node.js application and start the express server using forever.
-  - File `inventory` will be updated each time when a new AWS EC2 instance is built.
+  - File `inventory` stores the information of newly-added AWS EC2 instance. It is used to automatically configure one production environment.
+  - File `deploy_all_slavers.sh` is used to upsate all AWS EC2 instances.
+  - File `updateRedisIps.js` is called by `deploy_all_slavers.sh`. It will add a new ip address to Redis.
+  - File `slavers` stores the information of all created AWS EC2 instances. It is used to automatically configure all production environments when Jenkins build is pass.
   - File `package.json` is a configure file for node.js.
   - File `ec2_creator.sh` is a shell file. Basically, you can run `bash ec2_creator.sh`. And then a new AWS EC2 instance with production environment and our simple node.js application will be built.
   
