@@ -1,13 +1,13 @@
 # DevOps-M3
 This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/master/Project/M3.md). We use [M3-simpleApp](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp) as our simple node.js application.
  -  Simple node.js application: [link](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp)
- -  Screencast:
+ -  Screencast: [link](https://youtu.be/9Ea8s8RQEvM)
 
 ### Prerequisite
-Milestone 3 server structure.
+##### Milestone 3 server structure.
 ![flag](README_img/Server structure.png)
 
-Milestone 3 file structure. 
+##### Milestone 3 file structure. 
 ```
 .
 ├── ec2_manager
@@ -64,6 +64,11 @@ Milestone 3 file structure.
   - File `scaling.js` is the script for analyse the monitoring metrics from deployed AWS EC2 instances and autoscale individual components of production if necesssary.
   - File `package.json` is a configure file for node.js.
 
+
+##### Redis Data Structure
+  - Proxy - we use set data structure to store the ip addresses of slaver servers. Set in Redis supports random pop up. Hence it is easy for us to do load balance.
+  - Alert - we use 0 to represent alert is off and use 1 to represent alert if on.
+  - IP address - we also use each ip address as key to store the timestamp, CPU usage and memory usage of certain slave server. We will keep 20 records. And since the dafault delay of `os-monitor` is 3 seconds, we actually store one minute's monitoring information of each slave server. 
 
 ### TASK1: `Deploy after build, testing and analysis stage.`
 **Requirement:** The ability to deploy software to the production environment triggered after build, testing, and analysis stage is completed. The deployment needs to occur on actual remote machine/VM (e.g. AWS, droplet, VCL), and not a local VM.
@@ -174,10 +179,21 @@ node2                      : ok=16   changed=7    unreachable=0    failed=0
 ### TASK2: `Configure a production environment automatically.`
 **Requirement:** The ability to configure a production environment automatically, including all infrastructure components, such web server, app service, load balancers, and redis stores. Configure should be accopmlished by using a configuration management tool, such as ansible, or docker. Alternatively, a cluster management approach could also work (e.g., kubernates).
 
-We use ansible to meet with this requirement. The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/ec2_creator/deploy/deploy.yml) in /ec2_creator/deploy/ folder is focus on configuring the production environment, which will do following tasks each time:
- - Install node.js, npm
- - Git clone the simple node.js application source code 
- - Use forever to start the stable app on port 3000 and the canary app on port 3001.
+We use ansible to meet with this requirement. 
+
+ - **Main server automatic deployment**: 
+The [deploy_mainserver.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/main_server_deployer/deploy_mainserver.yml) under /main_server_deployer/ folder is used to configure the production environment of master server, which will do following tasks each time:
+  - Install node.js, npm
+  - Install and start Redis service
+  - Insert initial keys and values into Radis
+  - Git clone the simple node.js application source code
+  - Use forever to start the `Feature Flag Selector`, `Load Balancer` and `Monitoring & Scaling`.
+
+ - **AWS EC2 instance automatic deployment**: 
+The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/ec2_creator/deploy/deploy.yml) under /ec2_creator/deploy/ folder is focus on configuring the production environment of slave server, which will do following tasks each time:
+  - Install node.js, npm
+  - Git clone the simple node.js application source code 
+  - Use forever to start the stable app on port 3000 and the canary app on port 3001.
 
 ### TASK3: `Monitor the deployed application.`
 **Requirement:** The ability to monitor the deployed application (using at least 2 metrics) and send alerts using email or SMS (e.g., smtp, mandrill, twilio). An alert can be sent based on some predefined rule.
