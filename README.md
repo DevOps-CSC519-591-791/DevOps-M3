@@ -189,7 +189,7 @@ The [deploy_mainserver.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/
   - Git clone the simple node.js application source code
   - Use forever to start the `Feature Flag Selector`, `Load Balancer` and `Monitoring & Scaling`.
 
- - **AWS EC2 instance automatic deployment**: 
+ - **Slave server automatic deployment**: 
 The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/ec2_creator/deploy/deploy.yml) under /ec2_creator/deploy/ folder is focus on configuring the production environment of slave server, which will do following tasks each time:
   - Install node.js, npm
   - Git clone the simple node.js application source code 
