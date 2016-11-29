@@ -7,7 +7,7 @@ var alert = '0';
 var port;
 
 // REDIS
-var client = redis.createClient(6379, '54.234.163.154', {});
+var client = redis.createClient(6379, '54.175.133.60', {});
 
 // HTTP Proxy
 var proxy = httpProxy.createProxyServer({});
