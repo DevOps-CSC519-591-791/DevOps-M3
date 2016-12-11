@@ -49,7 +49,7 @@ This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Co
   
  - Folder `flag_selector` store the scripts and view pages of feature flag selection.
   - File `form.html` is a view page for feature flag selection and alert.
-  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([stable_inst.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/stable_inst.js) and [canary.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/canary.js)) in our simple node.js application will read certain key stored in redis and display certain turn-on features.
+  - File `selector.js` is a script for obtaining the feature flag(s) and alert from view page and store the information to a global redis store. And scripts ([stable_inst.js](https://github.com/DevOps-CSC519-591-791/M3-app/blob/master/stable_inst.js) and [canary.js](https://github.com/DevOps-CSC519-591-791/M3-app/blob/master/canary.js)) in our simple node.js application will read certain key stored in redis and display certain turn-on features.
   - File `package.json` is a configure file for node.js.
 
  - Folder `load_balancer` is used to perform a canary release - route a percantage of traffix to a newly staged version of application and remaining traffix to stable version of application.
@@ -73,7 +73,7 @@ This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Co
 ### TASK1: `Deploy after build, testing and analysis stage.`
 **Requirement:** The ability to deploy software to the production environment triggered after build, testing, and analysis stage is completed. The deployment needs to occur on actual remote machine/VM (e.g. AWS, droplet, VCL), and not a local VM.
 
-At beginning, the developer changes the source code (simple node.js application in this case), commits and pushes the modifications to GitHub.Then Then GitHub webhook will trigger Jenkins and start a new job. Each new job will run [test suite](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/test/test.js). The output of test suite is shown below.
+At beginning, the developer changes the source code (simple node.js application in this case), commits and pushes the modifications to GitHub.Then Then GitHub webhook will trigger Jenkins and start a new job. Each new job will run [test suite](https://github.com/DevOps-CSC519-591-791/M3-app/blob/master/test/test.js). The output of test suite is shown below.
 ```
 + bash test.sh
 info:    Forever processing file: stable_inst.js
@@ -182,7 +182,7 @@ node2                      : ok=16   changed=7    unreachable=0    failed=0
 We use ansible to meet with this requirement. 
 
  - **Main server automatic deployment**: 
-The [deploy_mainserver.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/main_server_deployer/deploy_mainserver.yml) under /main_server_deployer/ folder is used to configure the production environment of master server, which will do following tasks each time:
+The [deploy_mainserver.yml](/main_server_deployer/deploy_mainserver.yml) under /main_server_deployer/ folder is used to configure the production environment of master server, which will do following tasks each time:
   - Install node.js, npm
   - Install and start Redis service
   - Insert initial keys and values into Radis
@@ -190,7 +190,7 @@ The [deploy_mainserver.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/
   - Use forever to start the `Feature Flag Selector`, `Load Balancer` and `Monitoring & Scaling`.
 
  - **Slave server automatic deployment**: 
-The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/ec2_creator/deploy/deploy.yml) under /ec2_creator/deploy/ folder is focus on configuring the production environment of slave server, which will do following tasks each time:
+The [deploy.yml](/ec2_creator/deploy/deploy.yml) under /ec2_creator/deploy/ folder is focus on configuring the production environment of slave server, which will do following tasks each time:
   - Install node.js, npm
   - Git clone the simple node.js application source code 
   - Use forever to start the stable app on port 3000 and the canary app on port 3001.
@@ -198,9 +198,9 @@ The [deploy.yml](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master
 ### TASK3: `Monitor the deployed application.`
 **Requirement:** The ability to monitor the deployed application (using at least 2 metrics) and send alerts using email or SMS (e.g., smtp, mandrill, twilio). An alert can be sent based on some predefined rule.
 
-We wrote a [monitoring.js](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp/blob/master/monitoring.js) file to check the `CPU usage` and `memory usage` of each AWS EC2 instance each 3 seconds by default. Then we stored the latest 20 records into Redis store using each ip address as the key.
+We wrote a [monitoring.js](https://github.com/DevOps-CSC519-591-791/M3-app/blob/master/monitoring.js) file to check the `CPU usage` and `memory usage` of each AWS EC2 instance each 3 seconds by default. Then we stored the latest 20 records into Redis store using each ip address as the key.
 
-In [scaling.js](https://github.ncsu.edu/DevOps-Milestones/DevOps-M3/blob/master/monitoring/scaling.js) file, we will check the average CPU and memory usage of each AWS EC2 instances by using [os-monitor](https://www.npmjs.com/package/os-monitor). If both the average CPU usage and average memory usage is higher than 70%, an email will be send by using [Nodemailer 2.x](https://nodemailer.com/).
+In [scaling.js](/monitoring/scaling.js) file, we will check the average CPU and memory usage of each AWS EC2 instances by using [os-monitor](https://www.npmjs.com/package/os-monitor). If both the average CPU usage and average memory usage is higher than 70%, an email will be send by using [Nodemailer 2.x](https://nodemailer.com/).
 
 ### TASK4: `Autoscale individual components of production.`
 **Requirement:** The ability to autoscale individual components of production and maintain and track in a central discovery service. Autoscale can be triggered by a predefined rule.
