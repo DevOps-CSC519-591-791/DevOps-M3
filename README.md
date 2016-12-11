@@ -1,6 +1,6 @@
 # DevOps-M3
-This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/master/Project/M3.md). We use [M3-simpleApp](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp) as our simple node.js application.
- -  Simple node.js application: [link](https://github.ncsu.edu/DevOps-Milestones/M3-simpleApp)
+This is the repository for [DevOps Milestone 3](https://github.com/CSC-DevOps/Course/blob/master/Project/M3.md). We use [M3-app](https://github.com/DevOps-CSC519-591-791/M3-app) as our simple node.js application.
+ -  Simple node.js application: [link](https://github.com/DevOps-CSC519-591-791/M3-app)
  -  Screencast: [link](https://youtu.be/9Ea8s8RQEvM)
 
 ### Prerequisite
